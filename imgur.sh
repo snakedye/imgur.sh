@@ -106,10 +106,12 @@ elif type clip &>/dev/null; then
 elif [ $DISPLAY ]; then
 	if type xsel &>/dev/null; then
 		echo -n "$clip" | xsel -i
+	elif type wl-copy &>/dev/null; then
+		echo -n "$clip" | wl-copy
 	elif type xclip &>/dev/null; then
 		echo -n "$clip" | xclip
 	else
-		echo "Haven't copied to the clipboard: no xsel or xclip" >&2
+		echo "Haven't copied to the clipboard: no xsel, wl-copy, or xclip" >&2
 	fi
 else
 	echo "Haven't copied to the clipboard: no \$DISPLAY or pbcopy or clip" >&2
@@ -118,3 +120,4 @@ fi
 if $errors; then
 	exit 1
 fi
+
